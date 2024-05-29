@@ -6,7 +6,9 @@ import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
@@ -18,6 +20,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.Dp
+import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.jetpackcomposepractice.ui.theme.JetpackComposePracticeTheme
@@ -40,16 +44,28 @@ class MainActivity : ComponentActivity() {
 fun FirstApp(modifier: Modifier) {
     Surface(
         modifier = modifier
-            .fillMaxSize(),
-        color = Color.Blue,
-        border = BorderStroke(2.dp, Color.Red)
+            .fillMaxSize()
+            .border(2.dp, Color.Red)
     ) {
-        Text(
-            text = "My First App Practice",
-            fontSize = 32.sp,
-            modifier = Modifier.padding(10.dp)
-        )
+        Column {
+            MyText(text = "My First App Practice", fontSize = 32.sp, modifier = Modifier.padding(start = 10.dp))
+            MyText(text = "Hello World", fontSize = 16.sp, modifier = Modifier.padding(start = 10.dp, top = 10.dp))
+            MyText(text = "Utkarsh Karki", fontSize = 12.sp, modifier = Modifier.padding(start = 10.dp, top = 10.dp))
+        }
     }
+}
+
+@Composable
+fun MyText(
+    text: String,
+    fontSize: TextUnit,
+    modifier: Modifier
+) {
+    Text(
+        text = text,
+        fontSize = fontSize,
+        modifier = modifier
+    )
 }
 
 @Preview(showBackground = true)
