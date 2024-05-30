@@ -47,6 +47,19 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.ParagraphStyle
+import androidx.compose.ui.text.SpanStyle
+import androidx.compose.ui.text.buildAnnotatedString
+import androidx.compose.ui.text.font.Font
+import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.text.font.FontStyle
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.style.TextDecoration
+import androidx.compose.ui.text.style.TextIndent
+import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
@@ -74,11 +87,49 @@ fun FirstApp(modifier: Modifier) {
 //    ModifierPractice()
 //    ButtonComposableTypes()
 //    StylingButtonComposable()
-    ButtonOnClickPractice()
+//    ButtonOnClickPractice()
+    StylingTextComposable()
 }
 
 @Composable
-fun ButtonOnClickPractice(modifier: Modifier = Modifier) {
+fun StylingTextComposable() {
+    val myFont = FontFamily(Font(R.font.architects_daughter))
+    Column {
+        Text(
+            text = stringResource(R.string.practice).repeat(10),
+            color = Color.Blue,
+            fontSize = 15.sp,
+            //        fontStyle = FontStyle.Italic,
+            fontWeight = FontWeight.Bold,
+            fontFamily = myFont,
+            //        textDecoration = TextDecoration.LineThrough,
+            //        textAlign = TextAlign.Center,
+            lineHeight = 40.sp,
+            maxLines = 4,
+            overflow = TextOverflow.Ellipsis,
+            modifier = Modifier
+                .background(Color.Gray)
+                .width(400.dp)
+        )
+        Text(text = buildAnnotatedString {
+            withStyle(style = ParagraphStyle(textIndent = TextIndent(firstLine = 20.sp))) {
+                withStyle(style = SpanStyle(color = Color.Blue, fontSize = 30.sp)) {
+                    append("J")
+                }
+                append("etpack")
+                withStyle(style = SpanStyle(color = Color.Blue, fontSize = 30.sp)) {
+                    append("C")
+                }
+                append("ompose")
+            }
+            append("ompose")
+        })
+    }
+
+}
+
+@Composable
+fun ButtonOnClickPractice() {
     var count by rememberSaveable {
         mutableIntStateOf(0)
     }
@@ -98,7 +149,7 @@ fun ButtonOnClickPractice(modifier: Modifier = Modifier) {
 }
 
 @Composable
-fun StylingButtonComposable(modifier: Modifier = Modifier) {
+fun StylingButtonComposable() {
     Column(
         modifier = Modifier
             .fillMaxSize(),

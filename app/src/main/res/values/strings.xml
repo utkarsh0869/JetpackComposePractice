@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">JetpackComposePractice</string>
+    <string name="practice">Jetpack Compose Text Compose Practice</string>
 </resources>
