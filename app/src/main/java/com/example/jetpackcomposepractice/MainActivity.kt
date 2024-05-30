@@ -50,14 +50,15 @@ fun FirstApp(modifier: Modifier) {
         modifier = modifier
             .height(150.dp).width(400.dp)
             .padding(16.dp),
-//            .border(2.dp, Color.Red),
         color = Color.Green,
-        shape = CutCornerShape(20.dp)
+        shape = CutCornerShape(20.dp),
+        border = BorderStroke(2.dp, color = Color.Red),
+        shadowElevation = 16.dp
     ) {
         Column {
-            MyText(text = "My First App Practice", fontSize = 32.sp, modifier = Modifier.padding(start = 10.dp))
-            MyText(text = "Hello World", fontSize = 16.sp, modifier = Modifier.padding(start = 10.dp, top = 10.dp))
-            MyText(text = "Utkarsh Karki", fontSize = 12.sp, modifier = Modifier.padding(start = 10.dp, top = 10.dp))
+            MyText(text = "My First App Practice", fontSize = 32.sp, modifier = Modifier.padding(start = 15.dp))
+            MyText(text = "Hello World", fontSize = 16.sp, modifier = Modifier.padding(start = 15.dp, top = 10.dp))
+            MyText(text = "Utkarsh Karki", fontSize = 12.sp, modifier = Modifier.padding(start = 15.dp, top = 10.dp))
         }
     }
 }
