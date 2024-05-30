@@ -21,9 +21,19 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CutCornerShape
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Build
+import androidx.compose.material.icons.filled.Done
+import androidx.compose.material.icons.filled.Face
+import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -57,8 +67,74 @@ fun FirstApp(modifier: Modifier) {
 //    SurfaceComposableWithColumnsAndRows(modifier)
 //    NestedBoxComposable(modifier)
 //    ModifierPractice()
+    ButtonComposableTypes()
 
-    
+
+}
+
+@Composable
+fun ButtonComposableTypes() {
+    Column(
+        modifier = Modifier
+            .fillMaxSize(),
+        verticalArrangement = Arrangement.spacedBy(25.dp),
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        Button(onClick = { /*TODO*/ }) {
+            Text(
+                text = "DEFAULT BUTTON"
+            )
+        }
+        OutlinedButton(onClick = { /*TODO*/ }) {
+            Text(
+                text = "OUTLINED BUTTON"
+            )
+        }
+        IconButton(onClick = { /*TODO*/ }) {
+            Icon(
+                imageVector = Icons.Filled.Done,
+                contentDescription = "",
+                tint = Color.Red,
+                modifier = Modifier
+                    .size(ButtonDefaults.IconSize)
+            )
+        }
+        TextButton(onClick = { /*TODO*/ }) {
+            Icon(
+                imageVector = Icons.Filled.Face,
+                contentDescription = "",
+                tint = Color.Red,
+                modifier = Modifier
+                    .size(ButtonDefaults.IconSize)
+            )
+            Spacer(modifier = Modifier.size(ButtonDefaults.IconSpacing))
+            Text(text = "Above is the Icon Button")
+            Spacer(modifier = Modifier.size(ButtonDefaults.IconSpacing))
+            Icon(
+                imageVector = Icons.Filled.Face,
+                contentDescription = "",
+                tint = Color.Red,
+                modifier = Modifier
+                    .size(ButtonDefaults.IconSize)
+            )
+            Spacer(modifier = Modifier.size(ButtonDefaults.IconSpacing))
+            Icon(
+                imageVector = Icons.Filled.Face,
+                contentDescription = "",
+                tint = Color.Red,
+                modifier = Modifier
+                    .size(ButtonDefaults.IconSize)
+            )
+        }
+        Button(
+            onClick = { /*TODO*/ },
+            colors = ButtonDefaults.buttonColors(containerColor = Color.Blue)
+        ) {
+            Icon(imageVector = Icons.Filled.Build, contentDescription = "")
+            Spacer(modifier = Modifier.size(ButtonDefaults.IconSize))
+            Text(text = "BUILD")
+        }
+    }
 }
 
 @Composable
@@ -147,7 +223,11 @@ fun SurfaceComposableWithColumnsAndRows(
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Center
         ) {
-            MyText(text = "My First App Practice", fontSize = 32.sp, modifier = Modifier.padding(start = 15.dp))
+            MyText(
+                text = "My First App Practice",
+                fontSize = 32.sp,
+                modifier = Modifier.padding(start = 15.dp)
+            )
             Row(
                 horizontalArrangement = Arrangement.Center,
                 verticalAlignment = Alignment.CenterVertically
