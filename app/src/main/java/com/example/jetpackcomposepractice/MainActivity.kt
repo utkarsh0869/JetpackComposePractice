@@ -15,6 +15,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.shape.CutCornerShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
@@ -47,10 +48,11 @@ class MainActivity : ComponentActivity() {
 fun FirstApp(modifier: Modifier) {
     Surface(
         modifier = modifier
-            .height(150.dp).width(400.dp),
+            .height(150.dp).width(400.dp)
+            .padding(16.dp),
 //            .border(2.dp, Color.Red),
         color = Color.Green,
-        shape = RoundedCornerShape(28.dp, 28.dp, 28.dp, 28.dp)
+        shape = CutCornerShape(20.dp)
     ) {
         Column {
             MyText(text = "My First App Practice", fontSize = 32.sp, modifier = Modifier.padding(start = 10.dp))
