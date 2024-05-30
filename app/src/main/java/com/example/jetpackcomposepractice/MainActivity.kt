@@ -10,6 +10,7 @@ import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
@@ -62,9 +63,23 @@ fun FirstApp(modifier: Modifier) {
             verticalArrangement = Arrangement.Center
         ) {
             MyText(text = "My First App Practice", fontSize = 32.sp, modifier = Modifier.padding(start = 15.dp))
-            MyText(text = "Hello World", fontSize = 16.sp, modifier = Modifier.padding(start = 15.dp, top = 10.dp))
-            MyText(text = "Utkarsh Karki", fontSize = 12.sp, modifier = Modifier.padding(start = 15.dp, top = 10.dp))
+            Row(
+                horizontalArrangement = Arrangement.Center,
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                MyText(
+                    text = "Hello World",
+                    fontSize = 16.sp,
+                    modifier = Modifier.padding(start = 15.dp, top = 10.dp)
+                )
+                MyText(
+                    text = "Utkarsh Karki",
+                    fontSize = 16.sp,
+                    modifier = Modifier.padding(start = 15.dp, top = 10.dp)
+                )
+            }
         }
+
     }
 }
 
