@@ -14,7 +14,6 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -22,6 +21,7 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CutCornerShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Build
 import androidx.compose.material.icons.filled.Done
 import androidx.compose.material.icons.filled.Face
@@ -37,12 +37,10 @@ import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -67,11 +65,60 @@ fun FirstApp(modifier: Modifier) {
 //    SurfaceComposableWithColumnsAndRows(modifier)
 //    NestedBoxComposable(modifier)
 //    ModifierPractice()
-    ButtonComposableTypes()
+//    ButtonComposableTypes()
+    StylingButtonComposable()
 
 
 }
 
+@Composable
+fun StylingButtonComposable(modifier: Modifier = Modifier) {
+    Column(
+        modifier = Modifier
+            .fillMaxSize(),
+        verticalArrangement = Arrangement.spacedBy(25.dp),
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        Button(
+            onClick = { /*TODO*/ },
+            shape = RoundedCornerShape(topStart = 10.dp, bottomEnd = 20.dp)
+        ) {
+            Text(text = "Rounded corner button")
+        }
+        Button(
+            onClick = { /*TODO*/ },
+            shape = CutCornerShape(10.dp)
+        ) {
+            Text(text = "Cut corner button")
+        }
+        Button(
+            onClick = { /*TODO*/ },
+            modifier = Modifier
+                .size(100.dp),
+            shape = androidx.compose.foundation.shape.CircleShape
+        ) {
+//            Text(text = "Circe button")
+            Icon(imageVector = Icons.Filled.Add, contentDescription = "")
+        }
+        Button(
+            onClick = { /*TODO*/ },
+            shape = RoundedCornerShape(10.dp),
+            elevation = ButtonDefaults.buttonElevation(
+                defaultElevation = 10.dp,
+                pressedElevation = 5.dp
+            ),
+            colors = ButtonDefaults.buttonColors(
+                containerColor = Color(0xfffedbd0),
+                contentColor = Color.Red
+            ),
+            border = BorderStroke(1.dp, Color.Magenta)
+        ) {
+            Text(text = "Rounded corner button")
+            Icon(imageVector = Icons.Filled.Face, contentDescription = "")
+        }
+
+    }
+}
 @Composable
 fun ButtonComposableTypes() {
     Column(
