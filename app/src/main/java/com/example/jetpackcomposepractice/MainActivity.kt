@@ -7,12 +7,14 @@ import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -25,6 +27,9 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.alpha
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
@@ -49,42 +54,56 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun FirstApp(modifier: Modifier) {
-//    Surface(
-//        modifier = modifier
-//            .fillMaxSize()
-//            .padding(16.dp),
-//        color = Color.Green,
-//        shape = CutCornerShape(20.dp),
-//        border = BorderStroke(2.dp, color = Color.Red),
-//        shadowElevation = 16.dp
-//    ) {
-//        Column(
-//            horizontalAlignment = Alignment.CenterHorizontally,
-//            verticalArrangement = Arrangement.Center
-//        ) {
-//            MyText(text = "My First App Practice", fontSize = 32.sp, modifier = Modifier.padding(start = 15.dp))
-//            Row(
-//                horizontalArrangement = Arrangement.Center,
-//                verticalAlignment = Alignment.CenterVertically
-//            ) {
-//                MyText(
-//                    text = "Hello World",
-//                    fontSize = 16.sp,
-//                    modifier = Modifier.padding(start = 15.dp, top = 10.dp)
-//                )
-//                MyText(
-//                    text = "Utkarsh Karki",
-//                    fontSize = 16.sp,
-//                    modifier = Modifier.padding(start = 15.dp, top = 10.dp)
-//                )
-//            }
-//        }
-//
-//    }
+//    SurfaceComposableWithColumnsAndRows(modifier)
+//    NestedBoxComposable(modifier)
+//    ModifierPractice()
 
-    Box(modifier = modifier
-        .background(Color.Yellow)
-        .fillMaxSize(),
+    
+}
+
+@Composable
+fun ModifierPractice() {
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+    ) {
+        Text(
+            text = "Just Compose Practice",
+            modifier = Modifier
+                .padding(10.dp) // Acts as a margin
+                .background(Color.Green)
+                .padding(10.dp)
+//                .fillMaxSize()
+//                .size(150.dp) // Use size for equal height and width
+        )
+        Box(
+            modifier = Modifier
+                .padding(60.dp)
+                .size(250.dp)
+                .rotate(45f)
+//                .alpha(0.3f) // transparency
+                .clip(CutCornerShape(20.dp))
+                .border(5.dp, Color.Black, CutCornerShape(20.dp))
+                .background(Color.Cyan)
+                .align(alignment = Alignment.CenterHorizontally)
+                .clickable {
+
+                }
+
+        ) {
+
+        }
+    }
+}
+
+@Composable
+fun NestedBoxComposable(
+    modifier: Modifier = Modifier
+) {
+    Box(
+        modifier = modifier
+            .background(Color.Yellow)
+            .fillMaxSize(),
         contentAlignment = Alignment.Center
     ) {
         Box(
@@ -98,7 +117,7 @@ fun FirstApp(modifier: Modifier) {
                 modifier = Modifier
                     .background(Color.Green)
                 // Not specifying the width and height wraps the content according to the size
-                // of the text below. 
+                // of the text below.
 //                    .width(150.dp)
 //                    .height(150.dp)
             ) {
@@ -108,6 +127,44 @@ fun FirstApp(modifier: Modifier) {
                 )
             }
         }
+    }
+}
+
+@Composable
+fun SurfaceComposableWithColumnsAndRows(
+    modifier: Modifier = Modifier
+) {
+    Surface(
+        modifier = modifier
+            .fillMaxSize()
+            .padding(16.dp),
+        color = Color.Green,
+        shape = CutCornerShape(20.dp),
+        border = BorderStroke(2.dp, color = Color.Red),
+        shadowElevation = 16.dp
+    ) {
+        Column(
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.Center
+        ) {
+            MyText(text = "My First App Practice", fontSize = 32.sp, modifier = Modifier.padding(start = 15.dp))
+            Row(
+                horizontalArrangement = Arrangement.Center,
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                MyText(
+                    text = "Hello World",
+                    fontSize = 16.sp,
+                    modifier = Modifier.padding(start = 15.dp, top = 10.dp)
+                )
+                MyText(
+                    text = "Utkarsh Karki",
+                    fontSize = 16.sp,
+                    modifier = Modifier.padding(start = 15.dp, top = 10.dp)
+                )
+            }
+        }
+
     }
 }
 
