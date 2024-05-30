@@ -49,37 +49,65 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun FirstApp(modifier: Modifier) {
-    Surface(
-        modifier = modifier
-            .fillMaxSize()
-            .padding(16.dp),
-        color = Color.Green,
-        shape = CutCornerShape(20.dp),
-        border = BorderStroke(2.dp, color = Color.Red),
-        shadowElevation = 16.dp
+//    Surface(
+//        modifier = modifier
+//            .fillMaxSize()
+//            .padding(16.dp),
+//        color = Color.Green,
+//        shape = CutCornerShape(20.dp),
+//        border = BorderStroke(2.dp, color = Color.Red),
+//        shadowElevation = 16.dp
+//    ) {
+//        Column(
+//            horizontalAlignment = Alignment.CenterHorizontally,
+//            verticalArrangement = Arrangement.Center
+//        ) {
+//            MyText(text = "My First App Practice", fontSize = 32.sp, modifier = Modifier.padding(start = 15.dp))
+//            Row(
+//                horizontalArrangement = Arrangement.Center,
+//                verticalAlignment = Alignment.CenterVertically
+//            ) {
+//                MyText(
+//                    text = "Hello World",
+//                    fontSize = 16.sp,
+//                    modifier = Modifier.padding(start = 15.dp, top = 10.dp)
+//                )
+//                MyText(
+//                    text = "Utkarsh Karki",
+//                    fontSize = 16.sp,
+//                    modifier = Modifier.padding(start = 15.dp, top = 10.dp)
+//                )
+//            }
+//        }
+//
+//    }
+
+    Box(modifier = modifier
+        .background(Color.Yellow)
+        .fillMaxSize(),
+        contentAlignment = Alignment.Center
     ) {
-        Column(
-            horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.Center
+        Box(
+            modifier = Modifier
+                .background(Color.Red)
+                .width(250.dp)
+                .height(250.dp),
+            contentAlignment = Alignment.BottomCenter
         ) {
-            MyText(text = "My First App Practice", fontSize = 32.sp, modifier = Modifier.padding(start = 15.dp))
-            Row(
-                horizontalArrangement = Arrangement.Center,
-                verticalAlignment = Alignment.CenterVertically
+            Box(
+                modifier = Modifier
+                    .background(Color.Green)
+                // Not specifying the width and height wraps the content according to the size
+                // of the text below. 
+//                    .width(150.dp)
+//                    .height(150.dp)
             ) {
-                MyText(
-                    text = "Hello World",
-                    fontSize = 16.sp,
-                    modifier = Modifier.padding(start = 15.dp, top = 10.dp)
-                )
-                MyText(
-                    text = "Utkarsh Karki",
-                    fontSize = 16.sp,
-                    modifier = Modifier.padding(start = 15.dp, top = 10.dp)
+                Text(
+                    text = "Just Practicing",
+                    fontSize = 16.sp
                 )
             }
         }
-
     }
 }
 
