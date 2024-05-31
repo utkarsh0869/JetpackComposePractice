@@ -16,7 +16,9 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -39,6 +41,8 @@ import androidx.compose.material.icons.outlined.Email
 import androidx.compose.material.icons.outlined.Send
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -115,8 +119,63 @@ fun FirstApp(modifier: Modifier) {
 //    StylingTextComposable()
 //    TextFieldWithToastMessage()
 //    StylingTextField()
-    ImageComposablePractice()
+//    ImageComposablePractice()
+    CardComposable()
 }
+
+@Composable
+fun CardComposable() {
+    Box(
+        Modifier
+            .fillMaxSize(),
+        contentAlignment = Alignment.Center
+    ) {
+        Card(
+            Modifier
+                .width(250.dp)
+                .height(400.dp),
+//            shape = CutCornerShape(20.dp) // optional for cut cornered cards
+            elevation = CardDefaults.elevatedCardElevation(10.dp),
+            border = BorderStroke(3.dp, Color.Gray),
+            colors = CardDefaults.cardColors(
+                containerColor = Color.White
+            )
+        ) {
+            Column(
+                Modifier
+                    .fillMaxSize(),
+                horizontalAlignment = Alignment.CenterHorizontally
+
+            ) {
+                Image(
+                    painter = painterResource(id = R.drawable.utkarsh),
+                    contentDescription = "me",
+                    Modifier
+                        .aspectRatio(1f)
+                )
+                Text(
+                    text = "Utkarsh Karki",
+                    fontWeight = FontWeight.Bold,
+                    fontSize = 24.sp,
+                    modifier = Modifier
+                        .padding(10.dp)
+                )
+                Text(
+                    text = "This is me Utkarsh Karki practing Jetpack Compose, right now I am " +
+                            "styling the Text Composable with max lines as 3 and overflow",
+                    fontSize = 13.sp,
+                    modifier = Modifier
+                        .padding(6.dp),
+                    maxLines = 3,
+                    overflow = TextOverflow.Ellipsis,
+                    color = Color.Gray
+
+                )
+            }
+        }
+    }
+}
+
 @Composable
 fun ImageComposablePractice() {
     Column(
