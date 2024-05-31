@@ -30,11 +30,14 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Build
 import androidx.compose.material.icons.filled.Done
+import androidx.compose.material.icons.filled.Email
 import androidx.compose.material.icons.filled.Face
+import androidx.compose.material.icons.filled.Send
 import androidx.compose.material.icons.outlined.Email
 import androidx.compose.material.icons.outlined.Send
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.OutlinedButton
@@ -44,6 +47,7 @@ import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.material3.TextField
+import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
@@ -105,7 +109,60 @@ fun FirstApp(modifier: Modifier) {
 //    StylingButtonComposable()
 //    ButtonOnClickPractice()
 //    StylingTextComposable()
-    TextFieldWithToastMessage()
+//    TextFieldWithToastMessage()
+    StylingTextField()
+}
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun StylingTextField() {
+    Box(
+        Modifier
+            .fillMaxSize()
+            .background(Color.White)
+            .padding(top = 40.dp),
+        contentAlignment = Alignment.Center
+    ) {
+        var textState by remember {
+            mutableStateOf("")
+        }
+        val myColor = Color(0xFFD50000)
+        TextField(
+            value = textState,
+            onValueChange = {
+                textState = it
+            },
+            label = {
+                Text(text = "Your Name")
+            },
+            leadingIcon = {
+                Icon(
+                    imageVector = Icons.Default.Email,
+                    contentDescription = ""
+                )
+            },
+            trailingIcon = {
+                Icon(
+                    imageVector = Icons.Filled.Send,
+                    contentDescription = ""
+                )
+            },
+            colors = TextFieldDefaults.textFieldColors(
+                unfocusedLabelColor = myColor,
+                focusedLabelColor = myColor,
+                cursorColor = myColor,
+                focusedLeadingIconColor = myColor,
+                unfocusedIndicatorColor = Color.Transparent,
+                focusedTrailingIconColor = myColor,
+                unfocusedTrailingIconColor = myColor,
+                unfocusedLeadingIconColor = myColor,
+                focusedIndicatorColor = Color.Transparent,
+                containerColor = myColor.copy(.2f)
+//                containerColor = Color.Transparent
+            ),
+            shape = RoundedCornerShape(topStart = 25.dp, bottomEnd = 25.dp) // CutCornerShape
+        )
+    }
 }
 
 @OptIn(ExperimentalComposeUiApi::class)
