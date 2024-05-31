@@ -2,6 +2,7 @@ package com.example.jetpackcomposepractice
 
 import android.os.Bundle
 import android.util.Log
+import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
@@ -26,6 +27,8 @@ import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Build
 import androidx.compose.material.icons.filled.Done
 import androidx.compose.material.icons.filled.Face
+import androidx.compose.material.icons.outlined.Email
+import androidx.compose.material.icons.outlined.Send
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Icon
@@ -35,6 +38,7 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
+import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
@@ -47,6 +51,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.ParagraphStyle
 import androidx.compose.ui.text.SpanStyle
@@ -55,6 +60,7 @@ import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.text.style.TextIndent
@@ -88,7 +94,56 @@ fun FirstApp(modifier: Modifier) {
 //    ButtonComposableTypes()
 //    StylingButtonComposable()
 //    ButtonOnClickPractice()
-    StylingTextComposable()
+//    StylingTextComposable()
+    TextFieldWithToastMessage()
+}
+
+@Composable
+fun TextFieldWithToastMessage() {
+    Box(
+        modifier = Modifier.fillMaxSize(),
+        contentAlignment = Alignment.Center
+    ) {
+        var newTextValue by remember {
+            mutableStateOf("")
+        }
+        val context = LocalContext.current
+        Column(
+            verticalArrangement = Arrangement.spacedBy(25.dp)
+        ) {
+            TextField(
+                value = newTextValue,
+                onValueChange = {
+                    newTextValue = it
+                },
+                label = {
+                    Text(
+                        text = "Enter your email"
+                    )
+                },
+                maxLines = 1,
+                singleLine = true,
+                modifier = Modifier
+                    .width(300.dp),
+                placeholder = {
+                    Text(
+                        text = "test@xyz.com"
+                    )
+                },
+                // visualTransformation = PasswordVisualTransformation() // for passwords - black dots
+                leadingIcon = {
+                    Icon(imageVector = Icons.Outlined.Email, contentDescription = "")
+                },
+                trailingIcon = {
+                    IconButton(onClick = {
+                        Toast.makeText(context, newTextValue, Toast.LENGTH_SHORT).show()
+                    }) { // used if onClick is needed
+                        Icon(imageVector = Icons.Outlined.Send, contentDescription = "")
+                    }
+                }
+            )
+        }
+    }
 }
 
 @Composable
