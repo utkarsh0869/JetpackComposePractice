@@ -7,6 +7,7 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
@@ -20,6 +21,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.CutCornerShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.BasicText
@@ -61,8 +63,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.ParagraphStyle
 import androidx.compose.ui.text.SpanStyle
@@ -110,7 +114,48 @@ fun FirstApp(modifier: Modifier) {
 //    ButtonOnClickPractice()
 //    StylingTextComposable()
 //    TextFieldWithToastMessage()
-    StylingTextField()
+//    StylingTextField()
+    ImageComposablePractice()
+}
+@Composable
+fun ImageComposablePractice() {
+    Column(
+        Modifier
+            .fillMaxSize(),
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        Image(
+            painter = painterResource(id = R.drawable.utkarsh),
+            contentDescription = "me",
+            Modifier
+                .padding(10.dp)
+                .size(175.dp)
+                .clip(RoundedCornerShape(16.dp))
+                .border(width = 4.dp, color = Color.Red, shape = RoundedCornerShape(16.dp))
+//            contentScale = ContentScale.FillBounds,
+//            alpha = .2f
+        )
+        Image(
+            painter = painterResource(id = R.drawable.utkarsh),
+            contentDescription = "me",
+            Modifier
+                .padding(10.dp)
+                .size(175.dp)
+                .clip(CutCornerShape(16.dp))
+                .border(width = 4.dp, color = Color.Red, shape = CutCornerShape(16.dp))
+        )
+        Image(
+            painter = painterResource(id = R.drawable.utkarsh),
+            contentDescription = "me",
+            Modifier
+                .padding(10.dp)
+                .size(175.dp)
+                .clip(CircleShape)
+                .border(width = 4.dp, color = Color.Red, shape = CircleShape),
+            contentScale = ContentScale.Crop
+        )
+    }
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
