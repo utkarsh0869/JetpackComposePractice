@@ -22,6 +22,10 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CutCornerShape
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.BasicText
+import androidx.compose.foundation.text.BasicTextField
+import androidx.compose.foundation.text.KeyboardActions
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Build
@@ -34,6 +38,7 @@ import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.OutlinedButton
+import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
@@ -47,11 +52,13 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.ParagraphStyle
 import androidx.compose.ui.text.SpanStyle
@@ -60,6 +67,9 @@ import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.input.ImeAction
+import androidx.compose.ui.text.input.KeyboardCapitalization
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextDecoration
@@ -98,6 +108,7 @@ fun FirstApp(modifier: Modifier) {
     TextFieldWithToastMessage()
 }
 
+@OptIn(ExperimentalComposeUiApi::class)
 @Composable
 fun TextFieldWithToastMessage() {
     Box(
@@ -108,6 +119,7 @@ fun TextFieldWithToastMessage() {
             mutableStateOf("")
         }
         val context = LocalContext.current
+        val keyboardController = LocalSoftwareKeyboardController.current
         Column(
             verticalArrangement = Arrangement.spacedBy(25.dp)
         ) {
@@ -135,13 +147,55 @@ fun TextFieldWithToastMessage() {
                     Icon(imageVector = Icons.Outlined.Email, contentDescription = "")
                 },
                 trailingIcon = {
-                    IconButton(onClick = {
+                    IconButton(onClick = { // used if onClick is needed
                         Toast.makeText(context, newTextValue, Toast.LENGTH_SHORT).show()
-                    }) { // used if onClick is needed
+                    }) {
                         Icon(imageVector = Icons.Outlined.Send, contentDescription = "")
                     }
                 }
             )
+            OutlinedTextField(
+                value = newTextValue,
+                onValueChange = {
+                    newTextValue = it
+                },
+                label = {
+                    Text(
+                        text = "Enter your email"
+                    )
+                },
+                maxLines = 1,
+                singleLine = true,
+                modifier = Modifier
+                    .width(300.dp),
+                placeholder = {
+                    Text(
+                        text = "test@xyz.com"
+                    )
+                },
+                leadingIcon = {
+                    Icon(imageVector = Icons.Outlined.Email, contentDescription = "")
+                },
+                trailingIcon = {
+                    IconButton(onClick = {
+//                        Toast.makeText(context, newTextValue, Toast.LENGTH_SHORT).show()
+                    }) {
+                        Icon(imageVector = Icons.Outlined.Send, contentDescription = "")
+                    }
+                },
+                keyboardOptions = KeyboardOptions(
+                    capitalization = KeyboardCapitalization.Characters,
+                    keyboardType = KeyboardType.Phone,
+                    imeAction = ImeAction.Send
+                ),
+                keyboardActions = KeyboardActions(
+                    onSend = {
+                        keyboardController?.hide()
+                        Toast.makeText(context, "Send Button Pressed", Toast.LENGTH_SHORT).show()
+                    }
+                )
+            )
+            BasicTextField(value = "Basic Text Field", onValueChange = {})
         }
     }
 }
