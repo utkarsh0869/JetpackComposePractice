@@ -28,6 +28,8 @@ import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.CutCornerShape
@@ -48,6 +50,7 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.CardElevation
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -94,6 +97,7 @@ import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.jetpackcomposepractice.ui.theme.JetpackComposePracticeTheme
+import kotlin.random.Random
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -123,7 +127,54 @@ fun FirstApp(modifier: Modifier) {
 //    ImageComposablePractice()
 //    CardComposable()
 //    LazyRowAndColumnComposable()
-    LazyColumnWithImagePractice(modifier)
+//    LazyColumnWithImagePractice(modifier)
+    LazyGridComposable()
+}
+
+@Composable
+fun LazyGridComposable(
+    modifier: Modifier = Modifier
+) {
+    LazyVerticalGrid(
+        columns = GridCells.Adaptive(200.dp), // .Fixed(2) -- needs a count i.e. column count
+        contentPadding = PaddingValues(16.dp),
+    ) {
+        items(200) {
+            MyCard(
+                it,
+                modifier
+            )
+        }
+    }
+}
+
+@Composable
+fun MyCard(
+    it: Int,
+    modifier: Modifier
+) {
+    Card(
+        modifier = modifier
+            .size(100.dp)
+            .padding(6.dp),
+        elevation = CardDefaults.cardElevation(10.dp),
+        colors = CardDefaults.cardColors(
+            containerColor = Color(
+                Random.nextFloat(),
+                Random.nextFloat(),
+                Random.nextFloat(),
+                1f
+            )
+        )
+    ) {
+        Box(
+            modifier
+                .fillMaxSize(),
+            contentAlignment = Alignment.Center
+        ) {
+            Text(text = it.toString(), fontSize = 22.sp)
+        }
+    }
 }
 
 @Composable
