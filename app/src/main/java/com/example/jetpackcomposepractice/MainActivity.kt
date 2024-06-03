@@ -23,6 +23,8 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.CutCornerShape
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -120,7 +122,66 @@ fun FirstApp(modifier: Modifier) {
 //    TextFieldWithToastMessage()
 //    StylingTextField()
 //    ImageComposablePractice()
-    CardComposable()
+//    CardComposable()
+    LazyRowAndColumnComposable()
+}
+
+@Composable
+fun LazyRowAndColumnComposable() {
+    val langugages = listOf(
+        "C++",
+        "Kotlin",
+        "Java",
+        "C#",
+        "Go",
+        "JavaScript",
+        "PHP",
+        "HTML",
+        "CSS",
+        "Python",
+        "Swift"
+    )
+    Column(
+        Modifier
+            .fillMaxSize()
+    ) {
+        LazyRow(
+
+        ) {
+            items(items = langugages) { item ->
+                RowItem(name = item)
+            }
+        }
+    }
+}
+
+@Composable
+fun RowItem(name: String) {
+    Card(
+        Modifier
+            .padding(10.dp)
+            .fillMaxWidth()
+            .height(100.dp)
+            .aspectRatio(1.5f),
+        colors = CardDefaults.cardColors(
+            containerColor = Color.White
+        ),
+        elevation = CardDefaults.cardElevation(10.dp)
+    ) {
+        Box(
+            Modifier
+                .padding(10.dp)
+                .fillMaxSize(),
+            contentAlignment = Alignment.Center
+        ) {
+            Text(
+                text = name,
+                fontSize = 22.sp,
+                fontWeight = FontWeight.Bold
+            )
+        }
+
+    }
 }
 
 @Composable
@@ -466,6 +527,7 @@ fun StylingButtonComposable() {
 
     }
 }
+
 @Composable
 fun ButtonComposableTypes() {
     Column(
