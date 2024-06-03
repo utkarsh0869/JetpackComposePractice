@@ -14,6 +14,7 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.aspectRatio
@@ -23,12 +24,13 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.wrapContentHeight
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.CutCornerShape
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.foundation.text.BasicText
 import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
@@ -79,14 +81,10 @@ import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
-import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardCapitalization
 import androidx.compose.ui.text.input.KeyboardType
-import androidx.compose.ui.text.input.PasswordVisualTransformation
-import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.text.style.TextIndent
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.text.withStyle
@@ -128,7 +126,7 @@ fun FirstApp(modifier: Modifier) {
 
 @Composable
 fun LazyRowAndColumnComposable() {
-    val langugages = listOf(
+    val languages = listOf(
         "C++",
         "Kotlin",
         "Java",
@@ -146,12 +144,48 @@ fun LazyRowAndColumnComposable() {
             .fillMaxSize()
     ) {
         LazyRow(
-
+//            contentPadding = PaddingValues(10.dp)
         ) {
-            items(items = langugages) { item ->
+            items(items = languages) { item ->
                 RowItem(name = item)
             }
         }
+        LazyColumn(
+            contentPadding = PaddingValues(10.dp)
+        ) {
+            items(items = languages) { item ->
+                ColumnItems(name = item)
+            }
+        }
+    }
+}
+
+@Composable
+fun ColumnItems(name: String) {
+    Card(
+        Modifier
+            .padding(6.dp)
+            .fillMaxWidth()
+            .wrapContentHeight()
+            .aspectRatio(3f),
+        colors = CardDefaults.cardColors(
+            containerColor = Color.White
+        ),
+        elevation = CardDefaults.cardElevation(10.dp)
+    ) {
+        Box(
+            Modifier
+                .padding(10.dp)
+                .fillMaxSize(),
+            contentAlignment = Alignment.Center
+        ) {
+            Text(
+                text = name,
+                fontSize = 22.sp,
+                fontWeight = FontWeight.Bold
+            )
+        }
+
     }
 }
 
