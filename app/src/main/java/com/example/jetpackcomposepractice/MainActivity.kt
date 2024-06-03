@@ -25,6 +25,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentHeight
+import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
@@ -121,7 +122,93 @@ fun FirstApp(modifier: Modifier) {
 //    StylingTextField()
 //    ImageComposablePractice()
 //    CardComposable()
-    LazyRowAndColumnComposable()
+//    LazyRowAndColumnComposable()
+    LazyColumnWithImagePractice(modifier)
+}
+
+@Composable
+fun LazyColumnWithImagePractice(modifier: Modifier) {
+    val imageId = arrayOf(
+        R.drawable.utkarsh,
+        R.drawable.utkarsh,
+        R.drawable.utkarsh,
+        R.drawable.utkarsh,
+        R.drawable.utkarsh,
+        R.drawable.utkarsh,
+    )
+    val names = arrayOf(
+        "This",
+        "is",
+        "me",
+        "Utkarsh",
+        "Karki",
+        "Haha"
+    )
+    val ingredients = arrayOf(
+        "Tomato sauce, cheese",
+        "Tomato sauce, cheese, spinach",
+        "Tomato sauce, cheese, spinach, goda",
+        "Tomato sauce, cheese, spinach, goda, pineapple",
+        "Tomato sauce, cheese, spinach, goda, pineapple, jalapeno",
+        "Tomato sauce, cheese, spinach, goda, pineapple, jalapeno, chicken",
+    )
+    LazyColumn(
+        contentPadding = PaddingValues(16.dp)
+    ) {
+        val itemCount = imageId.size
+        items(itemCount) { item ->
+            ColumnItem(
+                itemIndex = item,
+                painter = imageId,
+                title = names,
+                ingredients = ingredients,
+                modifier = modifier
+            )
+        }
+    }
+}
+
+@Composable
+fun ColumnItem(
+    itemIndex: Int,
+    painter: Array<Int>,
+    title: Array<String>,
+    ingredients: Array<String>,
+    modifier: Modifier
+) {
+    Card(
+        modifier
+            .padding(10.dp)
+            .wrapContentSize(),
+        colors = CardDefaults.cardColors(
+            containerColor = Color.White
+        ),
+        elevation = CardDefaults.cardElevation(10.dp)
+    ) {
+        Row(
+            Modifier
+                .fillMaxWidth(),
+            verticalAlignment = Alignment.Top,
+            horizontalArrangement = Arrangement.spacedBy(15.dp)
+        ) {
+            Image(painter = painterResource(id = painter[itemIndex]),
+                contentDescription = title[itemIndex],
+                Modifier.size(140.dp)
+            )
+            Column {
+                Text(
+                    text = title[itemIndex],
+                    fontWeight = FontWeight.Bold,
+                    fontSize = 24.sp
+                )
+                Text(
+                    text = ingredients[itemIndex],
+                    fontSize = 18.sp
+                )
+            }
+
+        }
+    }
 }
 
 @Composable
